@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doğum Günü Pastası</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f8a5c2;
+      overflow: hidden;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Yıldızlar */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    .cake-container {
+      position: relative;
+      transform: scale(0);
+      animation: growCake 3s ease forwards;
+      z-index: 1;
+    }
+
+    @keyframes growCake {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .cake-body {
+      width: 200px;
+      height: 120px;
+      background: #8e5e4e;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .icing {
+      width: 200px;
+      height: 25px;
+      background: #fff;
+      border-radius: 10px 10px 0 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .candle {
+      background: #fff;
+      width: 7px;
+      height: 40px;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
+
+    .flame {
+      width: 10px;
+      height: 20px;
+      background: yellow;
+      border-radius: 50%;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from {opacity: 0.7;}
+      to {opacity: 1;}
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      background: #7f2d3d;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .wish-message, .big-heart, .final-message {
+      opacity: 0;
+      transition: opacity 2s ease;
+      margin-top: 20px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .big-heart {
+      font-size: 100px;
+      color: red;
+    }
+
+    .final-message {
+      font-size: 22px;
+      color: #5c1a2d;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Yıldızlar otomatik eklenecek -->
+
+<div class="cake-container" id="cake">
+  <div class="flame" id="flame"></div>
+  <div class="candle"></div>
+  <div class="cake-body">
+    <div class="icing"></div>
+  </div>
+</div>
+
+<button class="btn" onclick="blowCandle()">Mumu Üfle</button>
+
+<div class="wish-message" id="wishMsg">Dilek diledin mi?</div>
+<div class="big-heart" id="bigHeart">❤️</div>
+<div class="final-message" id="finalMsg">Doğum günün kutlu olsun gülüm ❤️</div>
+
+<script>
+function blowCandle() {
+  document.getElementById('flame').style.display = 'none';
+
+  setTimeout(() => {
+    document.getElementById('wishMsg').style.opacity = 1;
+  }, 1000);
+
+  setTimeout(() => {
+    document.getElementById('bigHeart').style.opacity = 1;
+  }, 2500);
+
+  setTimeout(() => {
+    document.getElementById('finalMsg').style.opacity = 1;
+  }, 4000);
+}
+
+// Arka plan yıldızlarını otomatik oluştur
+for (let i = 0; i < 80; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 3 + 1;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  star.style.top = Math.random() * 100 + 'vh';
+  star.style.left = Math.random() * 100 + 'vw';
+  star.style.animationDelay = Math.random() * 5 + 's';
+  document.body.appendChild(star);
+}
+</script>
+
+</body>
+</html>
